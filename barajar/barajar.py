@@ -1,5 +1,6 @@
 import random
 
+virg = ','
 recuo = {
 	'\t':	4,
     ' ': 1
@@ -20,6 +21,17 @@ def contarecuo (p, r = 0, valores = recuo):
 	return r
 
 	
+def linhas (prog):
+	if type(prog) == str:
+		prog = prog.splitlines()
+	c = len(prog)
+	prox = None
+	while c > 0:
+		c += -1
+		prox = linha(prog[c],prox)
+		prog[c] = prox
+	return prog
+
 
 class linha:
 
@@ -45,12 +57,33 @@ class linha:
 			except AttributeError:
 				pass
 
-		self.ln = ln
-		self.recuo = contarecuo(ln, valores = ind)
+		self.recuo = c = 0
+		self.cru = ln
+		try:
+			while c < len(ln):
+				self.recuo += ind[ln[c]]
+				c += 1
+		except KeyError:
+			pass
+		except TypeError:
+			self.ln = ln
+			return
+		self.ln = ln[c:]
 
-	def __init__ (self, cont = None, prox = None, indentation = recuo):
+	def __str__ (self):
+		return self.cru.__str__()
+	
+	def __repr__ (self, link = False):
+		s = virg + ' '
+		if link and self.prox != None:
+			s += self.prox.__repr__(link - 1) + virg
+		else:
+			s += 'identation = '
+		return self.__class__.__name__ + '(' + self.ln.__repr__() + s + '%d)'%self.recuo
+
+	def __init__ (self, valor = None, prox = None, indentation = recuo):
 		self.seguinte(prox)
-		self.linha(cont, indentation)
+		self.linha(valor, indentation)
 	#	self.cont = cont
 
 def embaralhar (*programas):
@@ -75,4 +108,5 @@ def embaralhar (*programas):
 
 
 
+print(linhas(open('barajar/barajar/barajar.py','r',encoding='utf8').read()))
 print(embaralhar([0,2,4,6,8],[1,[3,5,7],9,11,13,15,16],-1))
