@@ -3,7 +3,9 @@ import random
 virg = ','
 recuo = {
 	'\t':	4,
-    ' ': 1
+    ' ': 1,
+ 1: ' ',
+	4: '\t'
 }
 
 def contarecuo (p, r = 0, valores = recuo):
@@ -21,15 +23,18 @@ def contarecuo (p, r = 0, valores = recuo):
 	return r
 
 	
-def linhas (prog):
+def linhas (prog,prox=None,id=None,ind=recuo):
 	if type(prog) == str:
 		prog = prog.splitlines()
+	else:
+		prog = list(prog)
 	c = len(prog)
-	prox = None
 	while c > 0:
 		c += -1
-		prox = linha(prog[c],prox)
+		prox = linha(prog[c],prox,ind)
 		prog[c] = prox
+		if id != None:
+			prog[c].__id__((c,id))
 	return prog
 
 
@@ -56,9 +61,16 @@ class linha:
 				return self.ln
 			except AttributeError:
 				pass
+		elif self.__class__ == ln.__class__:
+			if self.id == None:
+				self.id = ln.id
+			if ind == recuo:
+				ind = ln.ind
+			ln = ln.cru
 
 		self.recuo = c = 0
-		self.cru = ln
+		self.cru = self.ln = ln
+		self.ind = ind
 		try:
 			while c < len(ln):
 				self.recuo += ind[ln[c]]
@@ -66,7 +78,8 @@ class linha:
 		except KeyError:
 			pass
 		except TypeError:
-			self.ln = ln
+			if type(ind) == int:
+				self.recuo = ind
 			return
 		self.ln = ln[c:]
 
@@ -74,17 +87,32 @@ class linha:
 		return self.cru.__str__()
 	
 	def __repr__ (self, link = False):
-		s = virg + ' '
+		s = virg
 		if link and self.prox != None:
-			s += self.prox.__repr__(link - 1) + virg
+			s += '\n' + ' '*self.recuo + self.prox.__repr__(link - (link > 0)) + virg
 		else:
-			s += 'identation = '
+			if self.id != None:
+				s += ' id = ' + str(self.id) + virg
+			s += 'identation='
 		return self.__class__.__name__ + '(' + self.ln.__repr__() + s + '%d)'%self.recuo
 
-	def __init__ (self, valor = None, prox = None, indentation = recuo):
+	def __init__ (self, valor = None, prox = None, indentation = recuo, id = None):
+		if prox == None and valor.__class__ == self.__class__:
+			prox = valor.prox
 		self.seguinte(prox)
 		self.linha(valor, indentation)
-	#	self.cont = cont
+		self.id = id
+	def __id__ (self,id=None):
+		if id == None:
+			return self.id
+		self.id = id
+
+	def __eq__ (self,outro):
+		return not self.__ne__(outro)
+	def __ne__ (self, outro):		
+		if self.__class__ == outro.__class__:
+			return self.recuo != outro.recuo or self.ln != outro.ln
+		return self.cru != outro and self.ln != outro
 
 def embaralhar (*programas):
 	programas = list(programas) # lista de listas (estas últimas que podem ser encadeadas) que serão utilizadas
@@ -107,6 +135,7 @@ def embaralhar (*programas):
 	return embaralhado
 
 
-
-print(linhas(open('barajar/barajar/barajar.py','r',encoding='utf8').read()))
+print(linhas(open('barajar/barajar/barajar.py','r',encoding='utf8').read(),id = 0))
+print(linha('    a',linha('   a',None,14),10).__repr__(-1))
+print(linha(linha('	a'),linha(' a')).__repr__(-1))
 print(embaralhar([0,2,4,6,8],[1,[3,5,7],9,11,13,15,16],-1))
