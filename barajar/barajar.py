@@ -31,7 +31,7 @@ def blocos (prog, novo = False):
 	ind = b = c = 0
 	while c < len(prog):
 		for i in coment:
-			if prog[c].find(i) == 0 or len(prog[c]) == 0:
+			if prog[c].find(i) == 0:
 				prog[c].recuo = ind
 				break
 		ind = contarecuo(prog[c])
@@ -69,22 +69,6 @@ def linhas (prog,prox=None,id=None,ind=recuo):
 
 class linha:
 
-	def seguinte (self, next = None):
-		
-		try:
-			if next == None:	
-				return self.prox
-		except AttributeError:
-			pass
-
-		self.prox = next
-
-	def indentar (self, r = 0):
-		try:
-			return self.prox.recuo - self.recuo
-		except AttributeError:
-			return r
-
 	def linha (self, ln = None, ind = recuo):
 
 		if ln == None:
@@ -113,6 +97,25 @@ class linha:
 				self.recuo = ind
 			return
 		self.ln = ln[c:]
+		if self.__len__() == 0:
+			self.recuo = contarecuo(self.seguinte())#self.prox.recuo
+
+	def seguinte (self, next = None):
+		
+		try:
+			if next == None:	
+				return self.prox
+		except AttributeError:
+			pass
+
+		self.prox = next
+
+	def indentar (self, r = 0):
+		try:
+			return self.prox.recuo - self.recuo
+		except AttributeError:
+			return r
+
 	
 	def index (self,*item):
 		return self.ln.index(*item)
@@ -207,6 +210,9 @@ def embaralhar (*programas):
 
 
 print(linhas(open('barajar/barajar/barajar.py','r',encoding='utf8').read(),id = 0))
-print(linha('    a',linha('   a',None,14),10).__repr__(-1))
-print(linha(linha('	a'),linha(' a')).__repr__(-1))
+print(linha('    a',linha('   a',None,14),10).find('a'))
+print(linha(linha('	a'),linha(' a')).find('a'))
 print(embaralhar([0,2,4,6,8],[1,[3,5,7],9,11,13,15,16],-1))
+for l in blocos(open('barajar/barajar/barajar.py','r',encoding='utf8').read()): 
+	if len(l) == 0:
+		print(l.__repr__(1))
