@@ -1,11 +1,15 @@
 import random
+import warnings
 
 virg = ','
+pyignore = '#'#, '"""',"'''"
+bloco = '#@bloco;','#@bloco_acabou;'
 recuo = {
 	'\t':	4,
     ' ': 1,
  1: ' ',
-	4: '\t'
+	4: '\t',
+0:pyignore	# comentários são sinalizados pelo 0
 }
 
 def contarecuo (p, r = 0, valores = recuo):
@@ -23,19 +27,18 @@ def contarecuo (p, r = 0, valores = recuo):
 		pass
 	return r
 
-def blocos (prog, novo = False):
-	if novo or type(prog) == str:
+def blocos (prog, novo = False, id = None, abre=bloco[0],fecha=bloco[1]):
+	if novo or type(prog) != list:
 		prog = linhas(prog)
 	novo = True
-	coment = '#','"""',"'''"
-	ind = b = c = 0
+	b = c = 0
 	while c < len(prog):
-		for i in coment:
-			if prog[c].find(i) == 0:
-				prog[c].recuo = ind
-				break
-		ind = contarecuo(prog[c])
-		if '#@bloco;' in prog[c]:
+		try:
+			if id != None:
+				prog[c].__id__((c,id))
+		except AttributeError:
+			pass
+		if abre in prog[c]:
 			prog[c] = [prog[c]]
 			b = c
 			c += 1
@@ -43,7 +46,7 @@ def blocos (prog, novo = False):
 		elif novo:
 			c += 1
 		else:
-			if '#@bloco_acabou;' in prog[c]:
+			if fecha in prog[c]:
 				novo = True
 			prog[b].append(prog.pop(c))
 	#	c += novo
@@ -96,20 +99,44 @@ class linha:
 			if type(ind) == int:
 				self.recuo = ind
 			return
-		self.ln = ln[c:]
-		if self.__len__() == 0:
+		try:
+			self.ln = ln[c:]
+			ln = 0
+			for c in ind[0]:
+				if self.find(c) == 0:
+					ln = self.__len__()
+					break
+		except KeyError:
+			pass
+		except:
+			warnings.warn('Ocorreu algum problema inesperado nas linhas anteriores!',RuntimeWarning)
+		if self.__len__() == ln:
 			self.recuo = contarecuo(self.seguinte())#self.prox.recuo
+			
 
 	def seguinte (self, next = None):
-		
 		try:
 			if next == None:	
 				return self.prox
 		except AttributeError:
 			pass
-
 		self.prox = next
-
+	def list (self,refresh=False):
+		i = 0
+		if refresh:
+		#	self.lista.clear()
+			prox = self
+			while prox != None:
+				if self.lista[i] != prox:
+					self.lista.insert(i,prox)
+				i += 1
+				try:
+					prox = prox.prox
+				except AttributeError:
+					break
+			while i < len(self.lista):
+				self.lista.pop(i)
+		return self.lista
 	def indentar (self, r = 0):
 		try:
 			return self.prox.recuo - self.recuo
@@ -127,13 +154,39 @@ class linha:
 			return -2
 		except:
 			return -1
-		
+	def startswith (self, prefixo, partida=0,limite=None, passo=1):
+		try:
+		#	if len(prefixo)>limite-partida:
+		#		return
+		#except TypeError:
+			return self.ln.startswith(prefixo,partida,limite)
+		except AttributeError:
+			if limite == None:
+				limite = self.__len__()
+			p = partida
+			while p < limite:
+				try:
+					i = self[p].index(prefixo)#startswith(prefixo)
+					if i == 0 or i == partida:
+						return True
+				except AttributeError:
+					pass
+				except ValueError:
+					pass
+				p += passo
+		return self.find(prefixo)==partida; 		
 
 	def __contains__ (self, item):
 		try:
 			return self.ln.__contains__(item)
 		except Exception:
 			return 
+
+	def __hash__ (self):
+		try:
+			return self.cru.__hash__()
+		except TypeError:
+			return self.indentar(self.recuo).__hash__()
 
 	def __str__ (self):
 		return self.cru.__str__()
@@ -148,12 +201,19 @@ class linha:
 			s += 'identation='
 		return self.__class__.__name__ + '(' + self.ln.__repr__() + s + '%d)'%self.recuo
 
+	def __reversed__ (self, refresh = None):
+		return self.list(refresh).__reversed__()
+	def __iter__ (self, refresh = None):
+		return self.list(refresh).__iter__()
+
 	def __init__ (self, valor = None, prox = None, indentation = recuo, id = None):
 		if prox == None and valor.__class__ == self.__class__:
 			prox = valor.prox
 		self.id = id
+		self.lista = []
 		self.seguinte(prox)
 		self.linha(valor, indentation)
+		
 		
 
 	def __id__ (self,id=None):
@@ -171,7 +231,7 @@ class linha:
 	def __ne__ (self, outro):		
 		if self.__class__ == outro.__class__:
 			return self.recuo != outro.recuo or self.ln != outro.ln
-		return self.cru != outro and self.ln != outro
+		return (self.cru != outro and self.ln != outro) or outro == None
 	def __ge__ (self, outro):
 		try:
 			return self.recuo >= outro.recuo or self.indentar() >= outro.indentar() 
@@ -182,11 +242,29 @@ class linha:
 			return self.recuo <= outro.recuo or self.indentar() <= outro.indentar()
 		except AttributeError:
 			return self.__str__() < str(outro) or self.__eq__(outro)
-	def __len__ (self):
+	def __len__ (self, novo = None, partida = None, passo = None):
 		try:
+			if novo != None:
+				if type(novo) != slice:
+					novo = slice(partida,novo,passo)
+				self.ln = self.ln[novo]
 			return self.ln.__len__()
 		except AttributeError:
 			return -1
+
+	def __getitem__ (self, i): 
+		try:
+			return self.ln[i]
+		except IndexError:
+			return self.ln
+		except KeyError:
+			return self
+		except: 
+			return 
+
+	
+		
+			
 
 def embaralhar (*programas):
 	programas = list(programas) # lista de listas (estas últimas que podem ser encadeadas) que serão utilizadas
@@ -209,6 +287,7 @@ def embaralhar (*programas):
 	return embaralhado
 
 
+
 print(linhas(open('barajar/barajar/barajar.py','r',encoding='utf8').read(),id = 0))
 print(linha('    a',linha('   a',None,14),10).find('a'))
 print(linha(linha('	a'),linha(' a')).find('a'))
@@ -216,3 +295,4 @@ print(embaralhar([0,2,4,6,8],[1,[3,5,7],9,11,13,15,16],-1))
 for l in blocos(open('barajar/barajar/barajar.py','r',encoding='utf8').read()): 
 	if len(l) == 0:
 		print(l.__repr__(1))
+print(linha()[0])
