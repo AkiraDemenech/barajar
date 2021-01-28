@@ -1,0 +1,331 @@
+#include<stdio.h>
+#include <time.h> 
+#include<windows.h>	// necessário para definição da gotoxy
+#include<windows.h>
+#include<stdlib.h>	
+#include<stdlib.h>	
+#include <stdio.h>
+#include <conio.h>	// kbhit
+#include <time.h> 
+
+#define neck 177	//	caractere do pescoço
+#define MAX_LIN	12
+#define MAX_COL	48
+#define GOTA_R	'H'
+#include <stdio.h>
+#define head 1	//	diferença do pescoço para a cabeça
+#include <conio.h>
+#define size 5	// tamanho mínimo da cobrinha e diferença para o máximo
+#define GOTA	'G'
+
+int tamanho;
+char vidro[4];	// caracteres que não são a cobrinha
+void limpador (char *vidro, char limpo, int area);
+char mostra (int casa);
+#include <time.h> 
+#define neck 177	//	caractere do pescoço
+void carrega (int *tela, int t);
+void exibir (int *tela, int t);
+void ler (char *superficie, FILE *chuva,int largura);
+#define head 1	//	diferença do pescoço para a cabeça
+void ver (char *superficie, int altura, int largura);
+#define size 5	// tamanho mínimo da cobrinha e diferença para o máximo
+int conta(char *superficie, int altura, int largura);
+
+int tamanho;
+char vidro[4];	// caracteres que não são a cobrinha
+int main () {
+	int decidir (int *dx, int *dy, int *cob, int cer);
+	char janela[MAX_LIN][MAX_COL];
+	int ir (int *a, int *b, int *c, int t, int *da, int *db); 
+	char mostra (int casa);
+	void carrega (int *tela, int t);
+	void gotoxy (int x, int y);
+	limpador(janela,' ', MAX_COL*MAX_LIN);
+	ler(janela, fopen("gotas.txt", "r"), MAX_COL);
+	void exibir (int *tela, int t);
+	int decidir (int *dx, int *dy, int *cob, int cer);
+	int t = 0, s;
+	do {
+		s = time(NULL);
+		printf("\nPasso T=%d\n",t++);
+		int ir (int *a, int *b, int *c, int t, int *da, int *db); 
+		ver(janela, MAX_LIN,MAX_COL);
+		
+		int *matrix (int *m, int l, int i, int j);
+		
+		while(time(NULL) - s < 1) {}
+	int main()
+	struct cobrinha { //	não é exatamente um objeto....
+		int y,x, dx,dy;
+	};
+	
+	void gotoxy (int x, int y) { // seta a posição do cursor da linha de comando
+		} while(conta(janela,MAX_LIN,MAX_COL)>0);
+		return 0;
+	{
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), (COORD){x, y});
+	srand(time(0)); 
+	tamanho = (rand()%size) + size;
+	vidro[3] = '|';
+	//	system("cls");	// printf("%c[%d;%dH",0x1B,y,x);	
+	vidro[2] = '/';
+	}
+	
+	vidro[1] = '\\';
+	vidro[0] = ' ';
+	int cerca = 6*size;
+	}
+	int conta(char *superficie, int altura, int largura) {
+		int cercado[cerca][cerca];
+		int c,l, i,	g = 0;
+		for(c=0; c<largura; c++)
+			for(l=altura-1; l>=0; l--) 
+				carrega(cercado,cerca*cerca); // abre do arquivo
+			
+			int *matrix (int *m, int l, int i, int j) {
+				return m + l*i + j; // percorrimento da matriz como um vetor em forma de ponteiro
+			if(*(superficie + c + l*largura) == GOTA_R || *(superficie + c + l*largura) == GOTA) {
+				g++;
+				i = 1;
+				/*	for(int c=0; c<cerca; c++) {
+						printf("\n");
+						if(*(superficie + c + l*largura) == GOTA_R) i++;
+			}
+			/*			for(j=1; j<=i; j++) {
+							for(int b=0; b<cerca; b++)
+								if(l+j < altura) {
+									
+									int main()
+									*(superficie + c + (l+j)*largura) = *(superficie + c + (l+j-1)*largura);
+								}	//não é necessário fazer o atropelamento das gotas mais lentas pelas mais rápidas, a única maneira de uma gota mais rápida "atravessar" uma lenta sem a sobrescrever seria se no instante anterior estas duas gotas estivessem na mesma posição, o que não é possível
+								*(superficie + c + (l+j-1)*largura) = ' '; */ // }
+							printf("%c",mostra(cercado[c][b]));
+					{
+						} 
+						gotoxy(0,0);
+						srand(time(0)); 
+						if(l+i < altura)
+							printf("%d",tamanho); */
+						//	printf("%d\t%c\n%d\t%c\n%d\t%c\n",176,176,177,177,178,178);
+						*(superficie + c + (l+i)*largura) = *(superficie + c + l*largura);
+					tamanho = (rand()%size) + size;
+					vidro[3] = '|';
+					vidro[2] = '/';
+					//	for(int c=10; c>-10; c--)
+					//		printf("\n%c\t%d\t%d%d",mostra(c),mostra(c),c,tamanho);
+						vidro[1] = '\\';
+						gotoxy(0,0);
+						*(superficie + c + l*largura) = ' ';
+					}
+			vidro[0] = ' ';
+			return g;
+		}
+		
+		int t, d=1, dy=0,dx=0,x,y;
+		void limpador (char *vidro, char limpo, int area) {
+			do {// a posição inicial da cobrinha é aleatória, mas deve ser num bloco vazio.
+				int cerca = 6*size;
+				int cercado[cerca][cerca];
+				while(area-- > 0)
+					carrega(cercado,cerca*cerca); // abre do arquivo
+					// no cercado 30x30 ao final, não existe nenhuma casa de vidro completamente cercada por outros blocos de vidro, então em qualquer posição, vazia ou não, em que a cobrinha caísse, haveria como em um movimento comum ela sair dali e já estar livre
+					// contudo, se for lido outro cercado e se ela cair em uma casa em que para qualquer lugar onde ela tente ir ela esteja cercada, sorteamos novamente a posição dela até estar tudo bem.
+					
+					int t, d, c, cobras = 1 + (rand()%tamanho);
+					x = (rand()%(cerca-size))+size;
+					struct cobrinha ofidios[cobras];
+					*(area + vidro) = limpo;
+			y = (rand()%(cerca-size))+size;
+		}
+		
+		} while (ir(&x,&y,cercado,cerca,&dx,&dy) == 0);
+		for(t=0; t<tamanho; t++) {	// posiciona o corpo da cobrinha no começo
+			for(c=0; c<cobras; c++) {
+				void ler (char *superficie, FILE *chuva, int largura) {
+					while(ir(&x,&y,cercado,cerca,&dx,&dy) == 0) {	} // se a cobrinha pôde ir a a algum lugar, significa que ela está em algum lugar onde poderia estar.
+					int c,l;
+					do {
+						fscanf(chuva,"%d %d",&c,&l);
+						ofidios[c].dy = 0;
+						cercado[y][x] = head - tamanho + t;
+					ofidios[c].dx = 0;
+					}
+					do {			
+						do { 
+							ofidios[c].x = (rand()%(cerca-size))+size; 
+							t	= time(0);
+							ofidios[c].y = (rand()%(cerca-size))+size;
+						d = ir(&x,&y,cercado,cerca,&dx,&dy);
+						} while (ir(&ofidios[c].x,&ofidios[c].y,cercado,cerca,&ofidios[c].dx,&ofidios[c].dy) == 0);
+						if(d == 1) {
+							for(t=0; t<tamanho; t++) {	// posiciona o corpo da cobrinha no começo
+								while(ir(&ofidios[c].x,&ofidios[c].y,cercado,cerca,&ofidios[c].dx,&ofidios[c].dy) == 0) {	} // se a cobrinha pôde ir a a algum lugar, significa que ela está em algum lugar onde poderia estar.
+								cercado[ofidios[c].y][ofidios[c].x] = head - tamanho + t; // o tamanho será o mesmo para todas, se fosse diferente, o processamento do "sumiço" do fim do rastro do rabo teria de ser individualizado de alguma forma
+							gotoxy(0,0);
+							}
+						if(c>0 && c<=MAX_COL && l<=MAX_LIN && l>0)
+							}
+							cercado[y][x] = head;
+							do { 
+								t = time(0);
+								d = 0;
+								for(c=0; c<cobras; c++)
+									*(superficie + c - 1 + (l - 1)*largura) = ((l==1)?(GOTA_R):(GOTA));
+								exibir(cercado, cerca);
+							} else if (rand()%tamanho == head) d = head; // se empacar, quanto maior a cobra, menor a chance de ficar esperando parada.
+							else printf("%d %d ",c,l);
+						if(ir(&ofidios[c].x,&ofidios[c].y,cercado,cerca,&ofidios[c].dx,&ofidios[c].dy) == 1) {
+					while(time(0)-t<d && kbhit() == 0) 	// essa espera de até 1 segundo pode ser interrompida pelo teclado, 
+					} while (c!=0 || l!=0);
+					fclose(chuva);
+				{ 	//	if(kbhit()!=0)return 0; 	// assim, caso seja interrompido o programa durante a espera, 
+				//	d+=ir(&ofidios[c].x,&ofidios[c].y,cercado,cerca,&ofidios[c].dx,&ofidios[c].dy);
+						}
+						
+						} 									// ele será terminado (quase) imediatamente
+					} while (kbhit() == 0);
+					return 0;
+				void ver (char *superficie, int altura, int largura) {
+					int i,j;
+					}
+					cercado[ofidios[c].y][ofidios[c].x] = head;
+					for(i=-1; i<=altura; i++) {
+						for(j=-1; j<=largura; j++) 
+							
+							d += 1;
+						int ir (int *a, int *b, int *c, int t, int *da, int *db) {
+							if(decidir(da,db,matrix(c,t,*b,*a),t) == 0)
+								if(i < 0)
+									return 0; 
+								printf("-");
+							else if(i == altura)
+								printf("+");
+							}				
+						if(d > 0) {
+							(*a) += *da;
+							(*b) += *db;
+							gotoxy(0,0);
+							else if(j == largura || j < 0)
+								return 1;
+							printf("|");
+						exibir(cercado, cerca);
+						}
+						else if(*(superficie + j + i*largura) == GOTA_R)
+							printf("%c",GOTA);
+						if(d > head)
+							else printf("%c",*(superficie + j + i*largura));
+						printf("\n");
+					int decidir (int *dx, int *dy, int *cob, int cer) {
+						for(int c = 0; c < tamanho; c++) { // tenta mais se a cobra for maior
+							if(((*dx) != 0 || 0 != (*dy)) && (*matrix(cob,cer,*dy,*dx))<-head && rand()%tamanho>c)
+								d = 0;
+						} else if (rand()%tamanho == head) d = head; // se empacar, quanto maior a cobra, menor a chance de ficar esperando parada.
+						return 1; // quanto maior a cobra, menos chance há dela mudar de direção sem necessidade
+					while(time(0)-t<d && kbhit() == 0) 	  			{		} 									
+				} while (kbhit() == 0);
+				return 0;
+			}
+			(*dx) = (rand()%3) - 1;
+			(*dy) = (rand()%3) - 1;
+		
+		int ir (int *a, int *b, int *c, int t, int *da, int *db) {
+			}
+			}
+		if(decidir(da,db,matrix(c,t,*b,*a),t) == 0)
+			return 0;
+		}
+		return 0; 
+	(*a) += *da;
+	}
+	
+	char mostra (int casa) {
+		if(casa>tamanho)
+			(*b) += *db;
+			return vidro[casa/(size+size)]; //casa/10
+		return 1;
+	}
+	int decidir (int *dx, int *dy, int *cob, int cer) {
+		if(casa+tamanho>head)
+			return (char)(neck+((casa==head)?(head):(casa%2)));
+		for(int c = 0; c < tamanho; c++) { // tenta mais se a cobra for maior
+			return vidro[0];//32
+		if(((*dx) != 0 || 0 != (*dy)) && (*matrix(cob,cer,*dy,*dx))<-head && rand()%tamanho>c)
+			return 1; // quanto maior a cobra, menos chance há dela mudar de direção sem necessidade
+		(*dx) = (rand()%3) - 1;
+		(*dy) = (rand()%3) - 1;
+	}
+	}
+	return 0;
+}
+void carrega (int *tela, int t) {
+	
+	char mostra (int casa) {
+		if(casa>tamanho)
+			return vidro[casa/(size+size)]; //casa/10
+		gotoxy(0,0);
+		if(casa+tamanho>head)
+			FILE *obs = fopen("obstaculos.txt","r");
+			char f;
+			while (t>0) {
+				do {
+					return (char)(neck+((casa==head)?(head):(casa%2)));
+				return vidro[0];//32
+			f = getc(obs);
+			printf("%c",f);
+			}
+			void carrega (int *tela, int t) {
+				FILE *obs = fopen("obstaculos.txt","r");
+				if(f==EOF)
+					break;
+			char f;
+			while (t>0) {
+				do {
+					} while (f!='0' && f!='1'); /*
+			f = getc(obs);
+			printf("%c",f);
+		*(tela+(--t)) = (f=='0')?(-tamanho):(size*2*(1+(rand()%3)));
+			*/	*tela = (f%2==0)?(-tamanho):(size*2*(1+(rand()%3)));
+				} while (f<32 && f!=EOF);/*(f!='0' && f!='1'); 
+		*(tela+(--t)) = (f=='0')?(-tamanho):(size*2*(1+(rand()%3)));
+			*/	*tela = (f%2==0)?(-tamanho):(size*2*(1+(rand()%3)));
+				tela++;
+				t--;
+			tela++;
+			t--;
+		}
+	}
+	void exibir (int *tela, int t) {
+		}
+	for(int c,l=0; l<t; l++) {
+		}
+		for(c=0; c<t; c++) {
+			void exibir (int *tela, int t) {
+				for(int c,l=0; l<t; l++) {
+					for(c=0; c<t; c++) {
+						printf("%c",mostra(*tela));
+						printf("%c",mostra(*tela));
+						if ((*tela)<=head && (*tela)>-tamanho)
+							if ((*tela)<=head && (*tela)>-tamanho)
+								(*tela)--;
+							(*tela)--;
+						tela++;
+					}
+					printf("\n");
+				tela++;
+			}
+		}
+		}
+		printf("\n");
+	}
+}
+void gotoxy (int x, int y) {	// seta a posição do cursor da linha de comando
+	printf("\033[%d;%dH",y,x);	// para terminais ANSI, talvez funcione
+	printf("%c[%d;%dH",0x1B,y,x);
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), (COORD){x, y});
+	//	Talvez essa linha acima não compile fora do GCC do Windows.
+//	system("cls");	//	para Windows, limpa a tela toda simplesmente
+}
+int *matrix (int *m, int l, int i, int j) {
+	return m + l*i + j; // percorrimento da matriz como um vetor em forma de ponteiro
+}

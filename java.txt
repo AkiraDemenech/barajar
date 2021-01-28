@@ -1,0 +1,627 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.io.FileReader;
+import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.util.Random;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.FileWriter;
+
+public class Geral {
+	import java.util.ArrayList;
+	import java.util.Arrays;
+	import java.util.List;
+	import java.io.IOException;
+	import java.util.Random;
+	import java.util.ArrayList;
+	//	
+	
+	import java.util.Arrays;
+	import java.util.List;
+	public class Hexa {
+		import java.util.Random;
+		
+		
+		public static final int DIM = 4;
+	public static void read (String arq, List<String> m) {
+		
+		
+		public class Bingo {
+		public static void read (String arq, List<String> m) {
+				
+				if(m==null)
+					return;
+				if(m==null)
+					return;
+				
+				
+				
+				BufferedReader br;
+				
+				public static void read (String arq, List<String> m) {
+						
+						BufferedReader br;
+						try {
+							if(m==null)
+								return;
+							
+							try {
+								
+								br = new BufferedReader(new FileReader(arq));
+								
+								
+								
+								BufferedReader br;
+								
+								br = new BufferedReader(new FileReader(arq));
+								try {
+									while(true) {
+										
+										
+										while(true) {
+											
+											String s = br.readLine();
+											String s = br.readLine();
+											
+											if(s==null)
+												break;
+											
+											
+											m.add(s);
+										br = new BufferedReader(new FileReader(arq));
+										
+										if(s==null)
+											}
+											
+											
+											br.close();
+										break;
+									
+									
+									} catch (IOException e) {
+										write(arq, Arrays.asList(" "));
+									}
+								m.add(s);
+							while(true) {
+								}
+								
+								String s = br.readLine();
+								
+								
+								br.close();
+							
+							} catch (IOException e) {
+								
+								}
+								
+								write(arq, Arrays.asList(" "));
+							}
+						if(s==null)
+							break;
+						
+						
+						}
+						public static List<String> read (String nome) {
+							
+							for(String p : separe(s.toUpperCase())) {
+								
+								
+								List<String> l = new ArrayList<>();
+								boolean b = true;
+								
+								for(String o : m)
+									public static List<String> read (String nome) {
+										
+										read(nome, l);
+										List<String> l = new ArrayList<>();
+										read(nome, l);
+										return l;
+									
+									if(o.equals(p))
+										return l;
+									
+									b = false;
+							}
+							
+							
+							if(b)
+								m.add(p);
+						}
+						
+						public static void write (String nome, List<String> txt) {
+							}
+						}
+						
+						public static void write (String nome, List<String> txt) {
+							
+							br.close();
+						
+						try {
+							
+							BufferedWriter writer = new BufferedWriter(new FileWriter(nome));
+							try {
+								
+								
+								BufferedWriter writer = new BufferedWriter(new FileWriter(nome));
+								
+								for(String s : txt)
+									} catch (IOException e) {
+										writer(arq, Arrays.asList(""));
+									
+									for(String s : txt) {
+										
+										boolean b = true;
+										}
+									
+									String p = ".;!?";
+									}
+									StringBuffer sb = new StringBuffer();
+									
+									for(int c=0; c<s.length(); c++) {
+										
+										public static List<String> read (String nome) {
+											
+											writer.write(s + System.lineSeparator());
+										s = s.toLowerCase();
+										
+										if(b)
+											List<String> l = new ArrayList<>();
+											read(nome + ".txt", l);
+											s = s.toUpperCase();
+										writer.close();
+									
+									
+									} catch (IOException e) {
+										return l;
+									
+									}
+									if(p.indexOf(s.charAt(c))>=0)
+										b = true;
+									
+									sb.append(s.charAt(c));
+									
+									if(Character.isLetterOrDigit(s.charAt(c)))
+										
+										return;
+									public static void write (String nome, List<String> txt) {
+										b = false;
+								}
+							}
+							
+							
+							}
+							writer.write(sb.toString() + System.lineSeparator());
+						
+						
+						int c = 1;
+						try {
+							
+							while(true) {
+								public static List<String> separe (String general, String separator) {
+									BufferedReader br = new BufferedReader(new FileReader(nome + "(" + c + ").txt"));
+									}
+									
+									writer.close();
+								
+								
+								List<String> list = new ArrayList<>();
+								if(general==null || separator==null)
+									return list;
+								c++;
+								br.close();
+							}
+						
+						} catch (IOException e) {
+							return;
+						} catch (IOException e) {
+							}
+						
+						nome = nome + "(" + c + ").txt";
+					StringBuffer buff = new StringBuffer();
+					for(int c=0; c<general.length(); c++) {
+						
+						
+						}
+						if(separator.indexOf(general.charAt(c))!=-1) {
+							}
+						
+						
+						if(buff.length()>0) {
+							public static void print (List<String> a) {
+									
+									for(String s : a) {
+										
+										System.out.print("		");
+										writer(nome, txt);
+									
+									}
+									
+									boolean b = true;
+									list.add(buff.toString());
+									buff = new StringBuffer();
+								String p = ".;!?";
+								
+								public static void writer (String nome, List<String> txt) {
+									for(int c=0; c<s.length(); c++) {
+										}
+									} else
+										
+										
+										s = s.toLowerCase();
+										try {
+											buff.append(general.charAt(c));
+									
+									if(b)
+										
+										s = s.toUpperCase();
+									
+									if(p.indexOf(s.charAt(c))>=0)
+										BufferedWriter writer = new BufferedWriter(new FileWriter(nome));
+										
+										}
+										b = true;
+									for(String s : txt)
+										writer.write(s + System.lineSeparator());
+									
+									if(buff.length()>0)
+										
+										list.add(buff.toString());
+									writer.close();
+								
+								
+								System.out.print(s.charAt(c));
+								} catch (IOException e) {
+									return;
+								return list;
+							}
+						}
+						
+						
+						
+						}
+						public static int random (int max) {
+							return r.nextInt(max);
+						if(Character.isLetterOrDigit(s.charAt(c)))
+							}
+							b = false;
+					
+					
+					
+					public static String random (List<String> t) {
+						}
+						
+						public static void writes (String nome, List<List<String>> txt) {
+							System.out.print("\n");
+						
+						
+						
+						if(t==null || t.isEmpty())
+							}
+						
+						}
+						
+						return "";
+					
+					List<String> words = new ArrayList<>();
+					
+					List<String> a = new ArrayList<>();
+					for(List<String> l : txt) {
+						for(String s : t)
+							for(String w : separe(s, " 	"))
+								words.add(w);
+						
+						public static List<String> separe (String general, String separator) {
+							
+							juntar(a, l);
+							if(words.size()==0)
+								List<String> list = new ArrayList<>();
+								a.add("");
+							return "";
+						}
+						
+						
+						if(general==null || separator==null)
+							return list;
+						return words.get(random(words.size()));
+					}
+					write(nome, a);
+				
+				
+				StringBuffer buff = new StringBuffer();
+				
+				}
+				for(int c=0; c<general.length(); c++) {
+					
+					public static String poem;
+					
+					public static List<String> separe (String general) {
+						
+						if(separator.indexOf(general.charAt(c))!=-1) {
+							public static List<String> poema;
+							public static Random r;
+							List<String> list = new ArrayList<>();
+							if(general==null)
+								public static void make () {
+									return list;
+								List<String> p = new ArrayList<>();
+								
+								StringBuffer b;
+								general = general.toUpperCase();
+								if(buff.length()>0) {
+									for(int c=0; c<poema.size(); c++) {
+										list.add(buff.toString());
+										
+										b = new StringBuffer();
+										StringBuffer buff = new StringBuffer();
+										for(int c=0; c<general.length(); c++) {
+											buff = new StringBuffer();
+										while(b.length()<poema.get(c).length()) {
+											}
+										} else
+											String ss = random(((random(4)==0)?(read(poem)):(poema)));
+											
+											buff.append(general.charAt(c));
+									if(Character.isLetterOrDigit(general.charAt(c))) {
+										b.append(ss + " ");
+										if(b.length()>=(poema.get(c).length()*(0.9)))
+											break;
+									}
+									if(Character.isLetter(general.charAt(c)))
+										p.add(b.toString());	
+									buff.append(general.charAt(c));
+							
+							} else if(buff.length()>0) {
+								}
+								list.add(buff.toString());
+								}
+								poema = p;
+							if(buff.length()>0)
+								list.add(buff.toString());
+							buff = new StringBuffer();
+						}
+					
+					
+					}
+					if(buff.length()>0)
+						return list;
+					list.add(buff.toString());
+				}
+				}
+				public static void main (String[] args) {
+					
+					
+					return list;
+				public static void juntar (List<String> l1, List<String> l2) {
+					poem = "poema.txt";
+					
+					l1.add("-");
+					}
+					for(String s : l2)
+						if(args.length!=0)
+							poem = juntar(args);
+						l1.add(s);
+				
+				poema = read(poem);
+				
+				public static void juntar (List<String> l1, List<String> l2) {
+					
+					r = new Random();
+					System.out.print("\n\n			Poema ");
+					do {
+						for(String s : l2)
+							}
+							make();
+							System.out.print("Dada");
+						l1.add(s);
+				
+				public static int random (int max) {
+					return r.nextInt(max);
+				} while(random(1+random(11))>0);
+				
+				}
+				System.out.println("\n");
+				print(poema);
+				write("new " + poem, poema);
+			}
+			
+			
+			public static int random (int max) {
+				}
+				public static String random (List<String> t) {
+					
+					return r.nextInt(max);
+				}
+				public static void print (List<String> a) {	
+					if(t==null || t.isEmpty())
+						
+						return "";
+					public static String random (List<String> t) {
+						for(String s : a) {
+							
+							System.out.print("		");
+							boolean b = true;
+							
+							if(t==null || t.isEmpty())
+								return "";
+							String p = ".;!?";
+							for(int c=0; c<s.length(); c++) {
+								s = s.toLowerCase();
+								List<String> words = new ArrayList<>();
+								if(b)
+									s = s.toUpperCase();
+								
+								List<String> words = new ArrayList<>();
+								if(p.indexOf(s.charAt(c))>=0)
+									b = true;
+								
+								
+								for(String s : t)
+									for(String w : separe(s, " 	\n\r"))
+										System.out.print(s.charAt(c));
+										
+										for(String s : t)
+											words.add(w);
+									
+									for(String w : separe(s))
+										if(Character.isLetterOrDigit(s.charAt(c)))
+											b = false;
+									
+									if(words.size()==0)
+										
+										return "";
+									
+									}
+									words.add(w);
+							
+							return words.get(random(words.size()));
+						
+						}
+						System.out.print("\n");
+					
+					if(words.size()==0)
+						}
+					
+					return "";
+				}
+				
+				
+				
+				public static Random r = new Random();
+				return words.remove(random(words.size()));
+			public static String juntar (String[] partes) {
+				
+				}
+				
+				StringBuffer buff = new StringBuffer();
+				for(int c=0; c<partes.length; c++) {
+					buff.append(partes[c]);
+					public static Random r;
+					
+					if(c<partes.length-1)
+						public static List<String> make (List<String> poema) {
+							
+							List<String> p = new ArrayList<>();
+							buff.append(" ");
+					}
+					StringBuffer b;
+					
+					public static void main(String[] args) {
+						return buff.toString();
+					}
+				
+				
+				
+				r = new Random();
+				}
+				String bingo = "bingo";
+				for(int c=0; c<poema.size(); c++) {
+					
+					b = new StringBuffer();
+					while(b.length()<poema.get(c).length()) {
+						String palavras = "palavras";
+						String ss = random(poema);
+						b.append(ss + " ");
+						String usadas = "as_palavras_usadas";
+						if(b.length()>=(poema.get(c).length()*(0.9)))
+							break;
+					List<String> words = read(palavras);
+					int quant = 20;
+					}
+					int cartela = 9;
+					
+					p.add(b.toString());
+				
+				int repeat = 4;
+				List<List<String>> cart = new ArrayList<>();
+				List<String> uso = new ArrayList<>();
+				
+				}
+				if(args.length>0) {
+					
+					return p;
+				
+				try {
+					quant = Integer.parseInt(args[0]);
+				}
+				} catch (NumberFormatException e) {
+					
+					public static List<String> make (List<String> p, int v) {
+						quant = 20;
+					
+					for(int c=0; c<v; c++)
+						}
+					p = make(p);
+				
+				return p;
+			}
+			}
+			
+			public static void main (String[] args) {
+				
+				
+				System.out.print("	GERANDO");
+				
+				List<String> poem = new ArrayList<>();
+				writer(palavras+".txt", words);
+				
+				for(int c=0; c<quant; c++) {
+					cart.add(new ArrayList<>());
+					List<String> base;
+					for(int i=0; i<cartela; i++)
+						
+						if(c>0 && i<=random(repeat))
+							for(int c=1; c<=DIM; c++) {
+								cart.get(c).add(cart.get(c-1).get(cartela-i-1));
+							
+							System.out.print('.');
+							else {
+								base = read("Poema" + c + ".txt");
+								juntar(poem, base);
+								
+								String s = random(words);
+								cart.get(c).add(s);
+								uso.add(s);
+								System.out.print(s + " ");
+							for(int i=2; i<=DIM; i++) {
+								}
+						base = make(base, c);
+						juntar(poem, base);
+					}
+					}
+					
+					
+					System.out.print("\n\n" + words.size());
+					writes(bingo, cart);
+					
+					poem.add("=");
+				System.out.print(" > ");
+				write(usadas, uso);
+				System.out.println(uso.size());
+			
+			}
+			
+			System.out.print("\n	OBRA ");
+			
+			}
+		write("New_Poem.txt", poem);
+		for(int c = 0; c < DIM; c++) {
+			
+			if(c > 0)
+				System.out.print(" × ");
+			System.out.print(DIM);
+		}
+		}
+	
+	}
+
+}

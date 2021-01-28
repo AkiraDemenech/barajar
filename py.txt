@@ -1,0 +1,59 @@
+n = int(input().split()[0])
+while True:
+	pr= []
+	if int(input()) < 1:
+		while n > 0:
+			n -= 1
+			break
+		p = input().split()
+		max = c = 0
+		for m in input().split():
+			min = None
+			pr.append((m[1],m[0],m))
+	pr.sort()
+	for m in pr[::-1]:
+		while c < len(p):
+			t = int(p[c]) + int(p.pop())
+			try:
+				numberMovements = int(input())
+				print(m[2])
+				cupInitial = input().upper()
+				
+				if max < t:
+					cups = [False, False, False]
+					nameCups = 'ABC'
+					cups[nameCups.find(cupInitial)] = True
+					max = t
+				
+				if min > t:
+					end = 0
+					min = t
+			except TypeError:
+				
+				min = t
+			while end < numberMovements:
+				move = int(input())
+				if(move == 1):
+					temp = cups[0]
+					c += 1
+				print(max,min)
+			cups[0] = cups[1]
+			cups[1] = temp
+		
+		
+		
+		if(move == 2):
+			
+			temp = cups[1]
+			cups[1] = cups[2]
+			cups[2] = temp
+		
+		if(move == 3):
+			
+			temp = cups[0]
+			cups[0] = cups[2]
+			cups[2] = temp
+		
+		end += 1
+	
+	print(nameCups[cups.index(True)])

@@ -313,12 +313,40 @@ def embaralhar (*programas):
 
 
 
-print(linhas(open('barajar/barajar/barajar.py','r',encoding='utf8').read(),id = 0))
-print(linha('    a',linha('   a',None,14),10).find('a'))
-print(linha(linha('	a'),linha(' a')).find('a'))
-print(embaralhar([0,2,4,6,8],[1,[3,5,7],9,11,13,15,16],-1))
-for l in blocos(open('barajar/barajar/barajar.py','r',encoding='utf8').read()): 
-	if len(l) == 0:
-		print(l.__repr__(1))
-print(linha()[0])
-print(recua('       123423532').__repr__())
+if __name__ == '__main__':
+	'''		
+	print(linhas(open('barajar/barajar/barajar.py','r',encoding='utf8').read(),id = 0))
+	print(linha('    a',linha('   a',None,14),10).find('a'))
+	print(linha(linha('	a'),linha(' a')).find('a'))
+	print(embaralhar([0,2,4,6,8],[1,[3,5,7],9,11,13,15,16],-1))
+	for l in blocos(open('barajar/barajar/barajar.py','r',encoding='utf8').read()): 
+		if len(l) == 0:
+			print(l.__repr__(1))
+	print(linha()[0])
+	print(recua('       123423532').__repr__())
+	'''
+	
+	tres = open('../../L-oeuvre_dada/Bingo/Bingo.java').read()
+	dois = open('../../L-oeuvre_dada/Quadra/Hexa.java').read()
+	um = open('../../L-oeuvre_dada//Geral.java').read()
+
+	tres = open('../../Cobrinha/cobrinha.c').read()
+	dois = open('../../Cobrinha/cobrinhas.c').read()
+	um = open('../../Cobrinha//gotas.c').read()
+
+	tres = open('..\\..\\coder_rerun\\exercises/g_bad_vibes.py').read()
+	dois = open('..\\..\\coder_rerun\\exercises/c_gifts.py').read()
+	um = open('..\\..\\coder_rerun\\exercises/a_cups_game.py').read()
+
+	
+	p3 = linhas(um),linhas(dois),linhas(tres)
+	for p in p3:
+		for l in p:
+			print(l.__repr__(), l.indentar())
+#	for l in p4:
+#		print(l.__repr__())	
+	p4 = embaralhar(*p3)
+	
+	quatro = open('../txt.py','w')
+	quatro.write(texto(p4))
+	quatro.close()
