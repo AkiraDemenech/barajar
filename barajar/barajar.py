@@ -5,12 +5,26 @@ virg = ','
 pyignore = '#'#, '"""',"'''"
 bloco = '#@bloco;','#@bloco_acabou;'
 recuo = {
+    None:[4,1], #	O índice de tamanhos, em ordem decrescente
 	'\t':	4,
     ' ': 1,
  1: ' ',
 	4: '\t',
 0:pyignore	# comentários são sinalizados pelo 0
 }
+
+def recua (r = 0, valores = recuo):
+#	r += contarecuo(p,r,valores)
+	t = ''
+	try:
+		for l in valores[None]:
+			t += valores[l]*(r//l)
+			r %= l
+	except TypeError:
+		warnings.warn('Os valores para recuo devem ser iteráveis e indicar os números das strings')
+	except KeyError:
+		warnings.warn('Os valores para recuo devem ter índice numérico ordenado coerente.')
+	return t
 
 def contarecuo (p, r = 0, valores = recuo):
 	
@@ -26,6 +40,7 @@ def contarecuo (p, r = 0, valores = recuo):
 	except KeyError:
 		pass
 	return r
+
 
 def blocos (prog, novo = False, id = None, abre=bloco[0],fecha=bloco[1]):
 	if novo or type(prog) != list:
@@ -54,6 +69,16 @@ def blocos (prog, novo = False, id = None, abre=bloco[0],fecha=bloco[1]):
 			
 			
 			
+def texto (prog, r = 0, cab='',sep='\n',ind=recuo):
+	for ln in prog:
+		if type(r) != list:
+			r = [contarecuo(ln,r,ind)]
+		if type(ln) == list:
+			cab += texto(ln,r,sep=sep,ind=ind)
+		else:
+			cab += recua(r[0],ind) + str(ln.ln) + sep
+			r[0] += ln.indentar()
+	return cab
 	
 def linhas (prog,prox=None,id=None,ind=recuo):
 	if type(prog) == str:
@@ -296,3 +321,4 @@ for l in blocos(open('barajar/barajar/barajar.py','r',encoding='utf8').read()):
 	if len(l) == 0:
 		print(l.__repr__(1))
 print(linha()[0])
+print(recua('       123423532').__repr__())
