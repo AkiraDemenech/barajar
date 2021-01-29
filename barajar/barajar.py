@@ -1,5 +1,6 @@
 import random
 import warnings
+from _io import TextIOWrapper
 
 virg = ','
 pyignore = '#'#, '"""',"'''"
@@ -14,6 +15,8 @@ recuo = {
 }
 
 def recua (r = 0, valores = recuo):
+	'''Dados uma posição de tabulação inicial inteira r e o dicionário valores ordenando inteiros e caracteres de indentação, 
+	 retorna uma string equivalente ao número fornecido orientado pelo índice na chave None.'''
 #	r += contarecuo(p,r,valores)
 	t = ''
 	try:
@@ -27,6 +30,8 @@ def recua (r = 0, valores = recuo):
 	return t
 
 def contarecuo (p, r = 0, valores = recuo):
+	'''Retorna o recuo da linha p somada à tabulação inicial r conforme o dicionário dos valores dos caracteres,
+	se p já não tiver recuo calculado.'''
 	
 	try:
 		if type(p) != str:
@@ -43,6 +48,10 @@ def contarecuo (p, r = 0, valores = recuo):
 
 
 def blocos (prog, novo = False, id = None, abre=bloco[0],fecha=bloco[1]):
+	'''Divide a lista de linhas prog (sendo essa lista copiada se novo for verdadeiro),
+	atribuindo, se possível, o id != None, abrindo os blocos e fechando de acordo com a presença das substrings fornecidas.
+	
+	O id é composto pela tupla do valor dado precedido pelo índice da lista, se o referido valor não for None.'''
 	if novo or type(prog) != list:
 		prog = linhas(prog)
 	novo = True
@@ -70,6 +79,7 @@ def blocos (prog, novo = False, id = None, abre=bloco[0],fecha=bloco[1]):
 			
 			
 def texto (prog, r = 0, cab='',sep='\n',ind=recuo):
+	'''Retorna o texto da lista de linhas prog com o recuo geral inteiro r com os caracteres do dicionário ind, a string de cabeçalho cab e sep como separador de linha.'''
 	for ln in prog:
 		if type(r) != list:
 			r = [contarecuo(ln,r,ind)]
@@ -80,7 +90,16 @@ def texto (prog, r = 0, cab='',sep='\n',ind=recuo):
 			r[0] += ln.indentar()
 	return cab
 	
-def linhas (prog,prox=None,id=None,ind=recuo):
+def linhas (prog,prox=None,id=None,ind=recuo,carrega=True):
+	'''Inicializa a lista (e as referências de lista ligada simples) prog,
+	referenciando a linha prox ao final, se id != None, atribui-o e conta o recuo inteiro pelo dicionário de indentação ind.
+
+	O id é composto pela tupla do valor dado precedido pelo índice da lista, se o referido valor não for None.
+	Ao final da função, o argumento carrega (verdadeiro por padrão) é fornecido para que a lista ligada completa seja montada (ou não) na primeira linha'''
+	if type(prog) == TextIOWrapper:
+		p = prog.read()
+	#	prog.close()
+		prog = p
 	if type(prog) == str:
 		prog = prog.splitlines()
 	else:
@@ -92,12 +111,16 @@ def linhas (prog,prox=None,id=None,ind=recuo):
 		prog[c] = prox
 		if id != None:
 			prog[c].__id__((c,id))
+	if len(prog) > 0:
+		prog[0].list(carrega)
 	return prog
 
 
 class linha:
 
 	def linha (self, ln = None, ind = recuo):
+		'''Getter e setter do atributo .ln sem a indentação, calculando também o .recuo com base no dicionário de caracteres ou valor final ind, igualado ao recuo da próxima linha se esta não tiver valor significativo (for inteiramente comentada ou completamente vazia).
+		Guarda o original no atributo .cru'''
 
 		if ln == None:
 			try:
@@ -140,6 +163,8 @@ class linha:
 			
 
 	def seguinte (self, next = None):
+		'''Setter e getter do link para a próxima linha.
+		Atenção: não há atualização da lista ligada completa aqui, deve-se solicitar recarregamento explicitamente.'''
 		try:
 			if next == None:	
 				return self.prox
@@ -147,22 +172,30 @@ class linha:
 			pass
 		self.prox = next
 	def list (self,refresh=False):
+		'''Getter e updater (se bool(refresh) == True) da lista ligada finita de todas as próximas linhas.
+		A lista termina no link None ou quando a segunda aparição do self for atingida
+		Se refresh for uma lista, .lista é atualizada para a nova referência'''
 		i = 0
+		if list == type(refresh):
+			self.lista = refresh
 		if refresh:
 		#	self.lista.clear()
 			prox = self
 			while prox != None:
-				if self.lista[i] != prox:
+				if i >= len(self.lista) or self.lista[i] != prox:
 					self.lista.insert(i,prox)
 				i += 1
 				try:
 					prox = prox.prox
+					if self == prox:
+						break
 				except AttributeError:
 					break
 			while i < len(self.lista):
 				self.lista.pop(i)
 		return self.lista
 	def indentar (self, r = 0):
+		'''Calcula a diferença entre o recuo da próxima linha e o recuo da linha atual, caso não exista algum dos dois recuos, retorna o argumento r'''
 		try:
 			return self.prox.recuo - self.recuo
 		except AttributeError:
@@ -202,21 +235,30 @@ class linha:
 		return self.find(prefixo)==partida; 		
 
 	def __contains__ (self, item):
+		'''item in self
+		'''
 		try:
 			return self.ln.__contains__(item)
 		except Exception:
 			return 
 
 	def __hash__ (self):
+		'''Hash da linha bruta, se .cru tiver, 
+		caso contrário, retorna a hash da variação de tabulação, se houver recuo na linha seguinte e, 
+		se não tiver, utiliza a hash do recuo (inteiro).'''
 		try:
 			return self.cru.__hash__()
 		except TypeError:
 			return self.indentar(self.recuo).__hash__()
 
 	def __str__ (self):
+		'''str(self.cru)
+		'''
 		return self.cru.__str__()
 	
 	def __repr__ (self, link = False):
+		'''Retorna a representação textual da linha refinada (.ln), se link != 0, inclui as link próximas linhas também (se link < 0, todas as próximas, sem tratamento de listas circulares).
+		A inicialização pela representação perde o dicionário do recuo .ind original e também perde o id se for exibir a lista ligada.'''
 		s = virg
 		if link and self.prox != None:
 			s += '\n' + ' '*self.recuo + self.prox.__repr__(link - (link > 0)) + virg
@@ -242,6 +284,8 @@ class linha:
 		
 
 	def __id__ (self,id=None):
+		'''Setter e getter do id. 
+		Ele não pode ser setado para None'''
 		if id == None:
 			return self.id
 		self.id = id
@@ -268,6 +312,7 @@ class linha:
 		except AttributeError:
 			return self.__str__() < str(outro) or self.__eq__(outro)
 	def __len__ (self, novo = None, partida = None, passo = None):
+		'''Getter e updater do comprimento de .ln'''
 		try:
 			if novo != None:
 				if type(novo) != slice:
@@ -292,7 +337,11 @@ class linha:
 			
 
 def embaralhar (*programas):
-	programas = list(programas) # lista de listas (estas últimas que podem ser encadeadas) que serão utilizadas
+	''' Embaralhamento simples: recebe listas para serem mescladas numa só. 
+		Não observa níveis de exclusão entre itens, somente a unidade deles.
+
+		Classes, funções, try-except e if-else não-blocados podem ter sintaxe da indentação prejudicada!'''
+	programas = [list(p) for p in programas] # lista de listas (estas últimas que podem ser encadeadas) que serão utilizadas
 	embaralhado = [] # programa de resultado
 
 	while len(programas) > 0:

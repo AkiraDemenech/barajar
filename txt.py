@@ -31,16 +31,16 @@ while True:
 					print(m[2])
 					try:
 						cups[1] = temp
-					if max < t:
-						max = t
-					if min > t:
-						min = t
-				except TypeError:
-					
-					if(move == 2):
-						temp = cups[1]
-						min = t
-					c += 1
+						if max < t:
+							max = t
+						if min > t:
+							min = t
+					except TypeError:
+						
+						if(move == 2):
+							temp = cups[1]
+							min = t
+						c += 1
 				print(max,min)
 			cups[1] = cups[2]
 			cups[2] = temp
